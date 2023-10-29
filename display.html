@@ -1,0 +1,128 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="display.css">
+    </head>
+    <body>
+      <div class=" result m-2">
+          <a class="btn btn-info" href="index.html">go back</a>
+          <h1>result goes here</h1>
+          <div class="container-fluid w-100 d-flex">
+            <div class=" w-100">
+              <div class="d-flex w-100 gap-3 ms-5" id="disp"></div>
+            </div>
+
+          </div>
+      </div>
+
+
+
+
+
+
+        <script>
+            let arrayOfBudget = JSON.parse(localStorage.getItem("evaluate"))
+            // console.log(resultOf);
+            if (arrayOfBudget && arrayOfBudget.length > 0) {
+                displayAll()
+            }
+            // function Edit(i){
+            //   console.log("i am here");
+            //   let Newname = document.getElementById("newName").value
+            //   let Newquant = document.getElementById("newQuantity").value
+            //   let Newprice = document.getElementById("newPrice").value
+            //   Newname = arrayOfBudget[i]
+            //   Newquant = arrayOfBudget[i]
+            //   Newprice = arrayOfBudget[i]
+            //   let userEdit={Newname, Newquant, Newprice}
+            //   if (arrayOfBudget && arrayOfBudget.length > 0) {
+            //     arrayOfBudget.splice (1, userEdit)
+            //     localStorage.setItem("evaluate", JSON.stringify(arrayOfBudget));
+            //     displayAll()
+            // }
+            // }
+            function Edit(i) {
+    console.log("i am here");
+    let newName = document.getElementById("newName").value;
+    let newQuant = document.getElementById("newQuantity").value;
+    let newPrice = document.getElementById("newPrice").value;
+    arrayOfBudget[i].Nam = newName;
+    arrayOfBudget[i].Quant = newQuant;
+    arrayOfBudget[i].Price = newPrice;
+
+    let userEdit = arrayOfBudget[i];
+
+    // if (arrayOfBudget && arrayOfBudget.length > 0) {
+        arrayOfBudget.splice(i, 1, userEdit); 
+        localStorage.setItem("evaluate", JSON.stringify(arrayOfBudget));
+        // disp.innerHTML=``
+        displayAll();
+    }
+// }
+
+            function Delete(i){
+                // console.log("i am here");
+                arrayOfBudget.splice (i, 1);
+                localStorage.setItem("evaluate", JSON.stringify(arrayOfBudget));
+                totalSpent = 0;
+                disp.innerHTML = "";
+                displayAll()  
+            }
+
+            function displayAll() {
+              let totalSpent = 0;
+                for(let i= 0; i < arrayOfBudget.length; i++){
+                    let item = arrayOfBudget[i];
+                    let totalCost = item.Quant * item.Price
+                    totalSpent += totalCost;              
+                disp.innerHTML += `<div class="shadow-lg card   ">
+                    <div class="card-body">
+                        <h5 class="card-title">your result</h5>
+                        <p class="card-text">Product: ${item.Nam} </p>
+                        <p class="card-text">Quantity: ${item.Quant} </p>
+                        <p class="card-text">Price: ${item.Price} </p>
+                        <p class="card-text">Total: ${totalCost.toFixed(2)} </p>
+                        
+                        <button onclick="Delete(${i} )" class="btn btn-danger">
+                            <span class="transition"></span>
+                            <span class="label">Delete</span>
+                            <span class="gradient"></span>
+                        </button>
+                        <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" id="example"  data-bs-toggle="modal" data-bs-target="#exampleModal">Edit
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input class="form-control my-3 w-75" type="text" placeholder="Enter the new name" id="newName">
+        <input class="form-control my-3 w-75" type="number" placeholder="Enter the new quantity" id="newQuantity">
+        <input class="form-control my-3 w-75" type="number" placeholder="Enter the new price" id="newPrice">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button onclick="Edit(${i})" type="button" class="btn btn-primary" data-bs-dismiss="modal">Edit</button>
+      </div>
+    </div>
+  </div>
+</div>
+                        </div>
+                        </div>`
+                    
+                      }
+                      disp.innerHTML += `<p class="text-white fw-bolder fs-3"> Total spent: #${totalSpent.toFixed(2)}</p>`
+            }
+        </script>
+    </body>
+    </html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="text-warning fw-bolder m-5 md-2">
+        <h1 >welcome, Miss Boluwatife</h1>
+    </div>
+    <div class=" container-fluid border shadow-lg w-50 border-2 p-4 mt-5 md-2 rounded rounded-5 ">
+        <center>
+            <p class="title">Enter you items </p>
+            <div class="text-danger fs-4 fw-bolder" id="showErro"></div>
+            <input class="form-control align-center my-3 w-50" type="text" placeholder="Enter the name" id="nameOfProduct">
+            <input class="form-control my-3 w-50" type="number" placeholder="Quantity" id="Quantity">
+            <input class="form-control my-3 w-50" type="number" placeholder="Price" id="Price">
+            <div id="disp"></div>
+            <!-- <button onclick="Add()">Add</button> -->
+            <button class="btn btn-info my-3 w-50" onclick="submit()">Submit</button>
+        </center>
+    </div>
+
+
+
+
+
+
+
+    <script>
+        let arrayOfBudget = JSON.parse(localStorage.getItem("evaluate")) || []
+        function submit() {
+            let Nam = document.getElementById("nameOfProduct").value
+            let Quant = document.getElementById("Quantity").value
+            let Price = document.getElementById("Price").value
+            let allTo ={Nam, Quant, Price}
+            if (Nam == "" & Price == "" & Quant ==""){
+                showErro.innerHTML = `please fill in your items`
+                setTimeout(()=> {
+                    showErro.innerHTML =``
+                }, 5000)
+            }
+            else {
+                // let arrayOfBudget = localStorage.setItem("evaluate", JSON.stringify(allTo)) || []
+                
+
+            arrayOfBudget.push(allTo)
+            localStorage.setItem("evaluate", JSON.stringify(arrayOfBudget));
+
+            document.getElementById("nameOfProduct").value = ""
+            document.getElementById("Quantity").value = ""
+            document.getElementById("Price").value = ""
+            showErro.innerHTML = ""
+            window.location.href="display.html"
+            }
+        }
+    </script>
+</body>
+</html>

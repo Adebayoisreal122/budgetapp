@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        // new way of writing our function
+        // instead of going like this
+        function goHome(){
+            console.log("i am already going");
+        }
+        goHome()
+        // then do this instead
+        const goHomes = () => {
+            console.log("am not going");
+        }
+        goHomes()
+        //higher order function
+        //1.map
+        //2. setTimeout
+        setTimeout(()=> {
+            console.log("i am not coming");
+        }, 5000)
+        //return statement
+        const myResult = ()=>{
+            let food ="Rice"
+            let drink = "Pepsi"
+            if (food == "Rice" && drink == "Pepsi"){
+                return "i am satisfied"
+            }else {
+                return " i am not satisfied"
+            }
+        }
+        console.log(myResult());
+    </script>
+</body>
+</html>

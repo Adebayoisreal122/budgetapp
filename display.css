@@ -1,0 +1,66 @@
+button {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 16px;
+    padding: 8px 10px;
+    font-weight: 500;
+    background: #1F2937;
+    color: white;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.6em;
+  }
+  
+  .gradient {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-radius: 0.6em;
+    margin-top: -0.25em;
+    background-image: linear-gradient(rgba(213, 150, 150, 0), rgba(74, 66, 66, 0), rgba(122, 99, 99, 0.3));
+  }
+  
+  .label {
+    position: relative;
+    top: -1px;
+  }
+  
+  .transition {
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    transition-duration: 5s;
+    background-color: rgba(41, 111, 197, 0.6);
+    border-radius: 99999px;
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  button:hover .transition {
+    width: 14em;
+    height: 14em;
+  }
+  
+  button:active {
+    transform: scale(0.97);
+  }
+body {
+  background-image: url(images/back_image.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+}
+.card{
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  width: 25%;
+}
+.container{
+  align-content: center;
+  align-self: center;
+}
