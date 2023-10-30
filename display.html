@@ -27,40 +27,21 @@
 
         <script>
             let arrayOfBudget = JSON.parse(localStorage.getItem("evaluate"))
-            // console.log(resultOf);
             if (arrayOfBudget && arrayOfBudget.length > 0) {
                 displayAll()
             }
-            // function Edit(i){
-            //   console.log("i am here");
-            //   let Newname = document.getElementById("newName").value
-            //   let Newquant = document.getElementById("newQuantity").value
-            //   let Newprice = document.getElementById("newPrice").value
-            //   Newname = arrayOfBudget[i]
-            //   Newquant = arrayOfBudget[i]
-            //   Newprice = arrayOfBudget[i]
-            //   let userEdit={Newname, Newquant, Newprice}
-            //   if (arrayOfBudget && arrayOfBudget.length > 0) {
-            //     arrayOfBudget.splice (1, userEdit)
-            //     localStorage.setItem("evaluate", JSON.stringify(arrayOfBudget));
-            //     displayAll()
-            // }
-            // }
             function Edit(i) {
     console.log("i am here");
+    let arrayOfBudget = JSON.parse(localStorage.getItem("evaluate"))
     let newName = document.getElementById("newName").value;
     let newQuant = document.getElementById("newQuantity").value;
     let newPrice = document.getElementById("newPrice").value;
-    arrayOfBudget[i].Nam = newName;
-    arrayOfBudget[i].Quant = newQuant;
-    arrayOfBudget[i].Price = newPrice;
-
-    let userEdit = arrayOfBudget[i];
-
-    // if (arrayOfBudget && arrayOfBudget.length > 0) {
+    newName = arrayOfBudget[i].Nam;
+    newQuant = arrayOfBudget[i].Quant; 
+    newPrice = arrayOfBudget[i].Price;
+    let userEdit = { Nam: newName, Quant: newQuant, Price: newPrice };
         arrayOfBudget.splice(i, 1, userEdit); 
         localStorage.setItem("evaluate", JSON.stringify(arrayOfBudget));
-        // disp.innerHTML=``
         displayAll();
     }
 // }
@@ -76,6 +57,7 @@
 
             function displayAll() {
               let totalSpent = 0;
+              disp.innerHTML=""
                 for(let i= 0; i < arrayOfBudget.length; i++){
                     let item = arrayOfBudget[i];
                     let totalCost = item.Quant * item.Price
@@ -94,19 +76,19 @@
                             <span class="gradient"></span>
                         </button>
                         <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" id="example"  data-bs-toggle="modal" data-bs-target="#exampleModal">Edit
+<button type="button" class="btn btn-primary" id="example"  data-bs-toggle="modal" data-bs-target="#exampleModal-${i}">Edit
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal-${i}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">write your edit</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <input class="form-control my-3 w-75" type="text" placeholder="Enter the new name" id="newName">
+        <input class="form-control my-3 w-75" type="text" placeholder="Enter the new name" id="newName-${i}">
         <input class="form-control my-3 w-75" type="number" placeholder="Enter the new quantity" id="newQuantity">
         <input class="form-control my-3 w-75" type="number" placeholder="Enter the new price" id="newPrice">
       </div>
