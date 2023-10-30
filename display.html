@@ -32,16 +32,16 @@
             }
             function Edit(i) {
     console.log("i am here");
-    let arrayOfBudget = JSON.parse(localStorage.getItem("evaluate"))
-    let newName = document.getElementById("newName").value;
-    let newQuant = document.getElementById("newQuantity").value;
-    let newPrice = document.getElementById("newPrice").value;
-    newName = arrayOfBudget[i].Nam;
-    newQuant = arrayOfBudget[i].Quant; 
-    newPrice = arrayOfBudget[i].Price;
-    let userEdit = { Nam: newName, Quant: newQuant, Price: newPrice };
-        arrayOfBudget.splice(i, 1, userEdit); 
+    // let arrayOfBudget = JSON.parse(localStorage.getItem("evaluate"))
+    let newName = document.getElementById(`newName-${i}`).value;
+    let newQuant = document.getElementById(`newQuantity-${i}`).value;
+    let newPrice = document.getElementById(`newPrice-${i}`).value;
+    arrayOfBudget[i]["Nam"] = newName
+    arrayOfBudget[i]["Quant"] = newQuant
+    arrayOfBudget[i]["Price"] = newPrice 
         localStorage.setItem("evaluate", JSON.stringify(arrayOfBudget));
+        totalSpent = 0;
+        disp.innerHTML= ""
         displayAll();
     }
 // }
@@ -89,8 +89,8 @@
       </div>
       <div class="modal-body">
         <input class="form-control my-3 w-75" type="text" placeholder="Enter the new name" id="newName-${i}">
-        <input class="form-control my-3 w-75" type="number" placeholder="Enter the new quantity" id="newQuantity">
-        <input class="form-control my-3 w-75" type="number" placeholder="Enter the new price" id="newPrice">
+        <input class="form-control my-3 w-75" type="number" placeholder="Enter the new quantity" id="newQuantity-${i}">
+        <input class="form-control my-3 w-75" type="number" placeholder="Enter the new price" id="newPrice-${i}">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
